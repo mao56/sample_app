@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     if user && user[:password_digest] && user.authenticate(params[:session][:password])
       #password_digestがなかった場合もlogin拒否にする
       log_in user
-      redirect_to user
+      redirect_back_or user
       #true
     else
       flash.now[:danger] = "email or password error!"
