@@ -11,6 +11,13 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   
-  resources :users
+  resources :users do
+    member do
+      #/users/:id/....
+      get :following, :followers
+      #GET /users/:id/following => followingアクション
+      #GET /users/:id/followed=> followedアクション
+    end
+  end
   resources :microposts,          only: [:create, :destroy]
 end
